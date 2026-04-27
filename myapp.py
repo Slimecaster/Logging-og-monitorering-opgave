@@ -1,25 +1,41 @@
-# myapp.py
 import logging
-import controller
 
+# 1. Create a logger
+logger = logging.getLogger("myapp")
+logger.setLevel(logging.DEBUG)  # capture everything; handlers decide what to show
+
+# 2. Create a formatter (how log lines look)
+formatter = logging.Formatter(
+    "%(asctime)s [%(levelname)s] %(message)s",
+    datefmt="%Y-%m-%d %H:%M:%S"
+)
+
+# 3. Console handler - prints to terminal
+console_handler = logging.StreamHandler()
+console_handler.setLevel(logging.INFO)
+console_handler.setFormatter(formatter)
+
+# 4. File handler - writes to app.log
+file_handler = logging.FileHandler("app.log")
+file_handler.setLevel(logging.DEBUG)
+file_handler.setFormatter(formatter)
+
+# 5. Attach the handlers to the logger
+logger.addHandler(console_handler)
+logger.addHandler(file_handler)
+
+
+# --- Example usage ---
 def main():
-    # Configure logging
-    logging.basicConfig(
-        filename='myapp.log',
-        level=logging.INFO,
-        format='%(asctime)s - %(name)s - %(levelname)s - %(message)s'
-    )
-    
-    logger = logging.getLogger(__name__)
-    
-    try:
-        logger.info('Started')
-        controller.do_something()
-        controller.run()
-    except KeyboardInterrupt:
-        logger.info('Server stopped by user')
-    except Exception as e:
-        logger.critical(f'Server stopped unexpectedly: {e}')
+    logger.info("Application started")
 
-if __name__ == '__main__':
+    logger.debug("This is a debug message (only goes to file)")
+    logger.info("Everything is running normally")
+    logger.warning("Something looks off, but we can continue")
+    logger.error("Something failed")
+    logger.critical("Something failed badly")
+    logger.info("Application finished")
+
+
+if __name__ == "__main__":
     main()

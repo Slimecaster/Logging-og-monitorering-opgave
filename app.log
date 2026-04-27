@@ -1,0 +1,7 @@
+2026-04-27 21:31:10 [INFO] Application started
+2026-04-27 21:31:10 [DEBUG] This is a debug message (only goes to file)
+2026-04-27 21:31:10 [INFO] Everything is running normally
+2026-04-27 21:31:10 [WARNING] Something looks off, but we can continue
+2026-04-27 21:31:10 [ERROR] Something failed
+2026-04-27 21:31:10 [CRITICAL] Something failed badly
+2026-04-27 21:31:10 [INFO] Application finished
